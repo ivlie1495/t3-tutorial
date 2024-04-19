@@ -1,4 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
+
 import { db } from "~/server/db";
 
 const Images = async () => {
