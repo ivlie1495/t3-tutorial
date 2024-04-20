@@ -32,8 +32,10 @@ export default function RootLayout({
       <html lang="en">
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <body className={`font-sans ${inter.variable}`}>
-          <TopNav />
-          {children}
+          <div>
+            <TopNav />
+            <main>{children}</main>
+          </div>
           {modal}
           <div id="modal-root" />
         </body>

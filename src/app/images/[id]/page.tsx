@@ -9,5 +9,9 @@ export default async function ImagePage({
 
   if (isNaN(Number(id))) throw new Error("Invalid id");
 
-  return <ImageFullView id={Number(id)} />;
+  return (
+    <div className="h-screen p-4">
+      <ImageFullView id={Number(id)} />
+    </div>
+  );
 }
