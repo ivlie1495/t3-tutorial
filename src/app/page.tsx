@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 import { getMyImages } from "~/server/queries";
+import Link from "next/link";
 
 const Images = async () => {
   const images = await getMyImages();
@@ -10,7 +11,9 @@ const Images = async () => {
     <div className="flex flex-wrap gap-4 p-4">
       {images.map((image) => (
         <div key={image.id} className="h-48 w-48">
-          <Image src={image.url} alt={image.name} width={480} height={480} />
+          <Link href={`/images/${image.id}`}>
+            <Image src={image.url} alt={image.name} width={480} height={480} />
+          </Link>
           <p>{image.name}</p>
         </div>
       ))}
