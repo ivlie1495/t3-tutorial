@@ -1,7 +1,13 @@
-export default function PhotoModal({
+import ImageFullView from "~/components/ImageFullView";
+
+export default async function ImagePage({
   params: { id },
 }: {
   params: { id: string };
 }) {
-  return <div>{id}</div>;
+  if (!id) throw new Error("Missing id");
+
+  if (isNaN(Number(id))) throw new Error("Invalid id");
+
+  return <ImageFullView id={Number(id)} />;
 }
