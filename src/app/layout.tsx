@@ -6,7 +6,7 @@ import { extractRouterConfig } from "uploadthing/server";
 import { ClerkProvider } from "@clerk/nextjs";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 
-import TopNav from "./_components/TopNav";
+import TopNav from "./_components/top-nav";
 import { ourFileRouter } from "./api/uploadthing/core";
 
 const inter = Inter({

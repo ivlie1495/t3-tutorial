@@ -1,4 +1,4 @@
-import ImageFullView from "~/components/ImageFullView";
+import ImageFullView from "~/components/image-full-view";
 
 export default async function ImagePage({
   params: { id },
