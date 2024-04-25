@@ -6,9 +6,7 @@ import * as Sentry from "@sentry/nextjs";
 
 import { Button } from "~/components/ui/button";
 
-type ErrorProps = Error & { digest?: string };
-
-export default function Error({ error }: { error: ErrorProps }) {
+const Error = ({ error }: { error: Error & { digest?: string } }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -17,11 +15,13 @@ export default function Error({ error }: { error: ErrorProps }) {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <h2 className="text-xl">{error.message || "Something went wrong"}</h2>
-      <p>Digest: {error.digest}</p>
-      <Button className="mt-4" onClick={router.back}>
+      <h2 className="text-xl">{error?.message || "Something went wrong"}</h2>
+      <p>Digest: {error?.digest}</p>
+      <Button className="mt-4" onClick={() => router.back()}>
         Back
       </Button>
     </div>
   );
-}
+};
+
+export default Error;

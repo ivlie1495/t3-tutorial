@@ -6,9 +6,7 @@ import * as Sentry from "@sentry/nextjs";
 
 import { Button } from "~/components/ui/button";
 
-type ErrorProps = Error & { digest?: string };
-
-export default function GlobalError({ error }: { error: ErrorProps }) {
+const GlobalError = ({ error }: { error: Error & { digest?: string } }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -18,12 +16,14 @@ export default function GlobalError({ error }: { error: ErrorProps }) {
   return (
     <html>
       <body>
-        <h2 className="text-xl">{error.message || "Something went wrong"}</h2>
-        <p>Digest: {error.digest}</p>
-        <Button className="mt-4" onClick={router.back}>
+        <h2 className="text-xl">{error?.message || "Something went wrong"}</h2>
+        <p>Digest: {error?.digest}</p>
+        <Button className="mt-4" onClick={() => router.back()}>
           Try again
         </Button>
       </body>
     </html>
   );
-}
+};
+
+export default GlobalError;
