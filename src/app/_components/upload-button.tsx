@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 import { useUploadThing } from "~/utils/uploadthing";
 
@@ -13,10 +14,10 @@ const useUploadThingInputProps = (...args: Input) => {
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
-    const selectedFiles = Array.from(e.target.files);
-    const result = await $ut.startUpload(selectedFiles);
+    // const selectedFiles = Array.from(e.target.files);
+    // const result = await $ut.startUpload(selectedFiles);
 
-    console.log("uploaded files", result);
+    // console.log("uploaded files", result);
     // TODO: persist result in state maybe?
   };
 
@@ -50,7 +51,15 @@ const UploadSVG = () => (
 const SimpleUploadButton = () => {
   const router = useRouter();
   const { inputProps } = useUploadThingInputProps("imageUploader", {
+    onUploadBegin: () => {
+      toast("Uploading...", {
+        id: "upload-begin",
+      });
+    },
     onClientUploadComplete: () => {
+      toast.dismiss("upload-begin");
+      toast("Upload Complete!");
+
       router.refresh();
     },
   });
