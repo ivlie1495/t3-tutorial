@@ -16,11 +16,15 @@ const GlobalError = ({ error }: { error: Error & { digest?: string } }) => {
   return (
     <html>
       <body>
-        <h2 className="text-xl">{error?.message || "Something went wrong"}</h2>
-        <p>Digest: {error?.digest}</p>
-        <Button className="mt-4" onClick={() => router.back()}>
-          Try again
-        </Button>
+        <div className="p-4">
+          <h2 className="text-xl">
+            {error?.message || "Something went wrong"}
+          </h2>
+          <p>Digest: {error?.digest}</p>
+          <Button className="mt-4" onClick={() => router.back()}>
+            Try again
+          </Button>
+        </div>
       </body>
     </html>
   );

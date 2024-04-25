@@ -14,7 +14,7 @@ const Error = ({ error }: { error: Error & { digest?: string } }) => {
   }, [error]);
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full flex-col items-center justify-center p-4">
       <h2 className="text-xl">{error?.message || "Something went wrong"}</h2>
       <p>Digest: {error?.digest}</p>
       <Button className="mt-4" onClick={() => router.back()}>
