@@ -6,6 +6,7 @@ import { auth } from "@clerk/nextjs/server";
 
 import { db } from "./db";
 import { images } from "./db/schema";
+import analyticsServerClient from "./analytics";
 
 export const getMyImages = async () => {
   const user = auth();
@@ -44,6 +45,15 @@ export const deleteImage = async (id: number) => {
   await db
     .delete(images)
     .where(and(eq(images.id, id), eq(images.userId, user.userId)));
+
+  analyticsServerClient.capture({
+    distinctId: user.userId,
+    event: "delete_image",
+    properties: {
+      imageId: id,
+      userId: user.userId,
+    },
+  });
 
   redirect("/");
 };
