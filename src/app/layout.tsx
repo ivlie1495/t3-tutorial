@@ -8,6 +8,7 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 
 import { Toaster } from "~/components/ui/sonner";
 
+import { CSPostHogProvider } from "./_analytics/provider";
 import TopNav from "./_components/top-nav";
 import { ourFileRouter } from "./api/uploadthing/core";
 
@@ -31,18 +32,20 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
-        <body className={`font-sans ${inter.variable}`}>
-          <div>
-            <TopNav />
-            <main>{children}</main>
-          </div>
-          {modal}
-          <div id="modal-root" />
-          <Toaster />
-        </body>
-      </html>
+      <CSPostHogProvider>
+        <html lang="en">
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+          <body className={`font-sans ${inter.variable}`}>
+            <div>
+              <TopNav />
+              <main>{children}</main>
+            </div>
+            {modal}
+            <div id="modal-root" />
+            <Toaster />
+          </body>
+        </html>
+      </CSPostHogProvider>
     </ClerkProvider>
   );
 }
