@@ -34,9 +34,9 @@ export default function RootLayout({
         <html lang="en">
           <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           <body className={`font-sans ${inter.variable}`}>
-            <div>
+            <div className="h-full">
               <TopNav />
-              <main>{children}</main>
+              <main className="h-full">{children}</main>
             </div>
             <Toaster />
           </body>
